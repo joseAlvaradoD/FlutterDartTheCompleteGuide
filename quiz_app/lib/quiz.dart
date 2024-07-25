@@ -9,41 +9,33 @@ class Quiz extends StatefulWidget {
   State<Quiz> createState() {
     return _QuizState();
   }
-  
 }
+
 class _QuizState extends State<Quiz> {
+  var activeScreen = 'start-screen';
 
-  Widget? activeScreen;
-
-  @override
-  void initState() {
-    super.initState();
-    activeScreen = StartScreen(switchScreen);
-  }
-
-  switchScreen(){
+  switchScreen() {
     setState(() {
-      activeScreen = const QuestionsScreen();
+      activeScreen = 'questions-screen';
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget screenWidget = StartScreen(switchScreen);
+
+    if(activeScreen == 'questions-screen'){
+      screenWidget = const QuestionsScreen();
+    }
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.deepPurple,
       ),
       child: Center(
-        child: activeScreen,
+        child: screenWidget,
       ),
     );
   }
 }
-
-//renderind conditional conten on flutter using..... 
-//I do not know what I will use to achieve this, 
-//but wait to see how I will resolve it.... 
-//to be continued.........
-//someday
-//maybe 
 
